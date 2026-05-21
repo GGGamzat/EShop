@@ -1,7 +1,6 @@
-﻿using InternetShop.Models;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
+using InternetShop.Models;
 using System.Threading.Tasks;
 
 namespace InternetShop.Controllers
@@ -40,6 +39,7 @@ namespace InternetShop.Controllers
 
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(user, "User");
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "Home");
                 }
@@ -71,7 +71,10 @@ namespace InternetShop.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToLocal(returnUrl);
+                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                        return Redirect(returnUrl);
+                    else
+                        return RedirectToAction("Index", "Home");
                 }
 
                 ModelState.AddModelError(string.Empty, "Неверный логин или пароль");
@@ -92,55 +95,5 @@ namespace InternetShop.Controllers
         {
             return View();
         }
-
-        private IActionResult RedirectToLocal(string? returnUrl)
-        {
-            if (Url.IsLocalUrl(returnUrl))
-            {
-                return Redirect(returnUrl);
-            }
-            else
-            {
-                return RedirectToAction("Index", "Home");
-            }
-        }
-    }
-}
-
-namespace InternetShop.Models
-{
-    public class RegisterViewModel
-    {
-        [Required]
-        [EmailAddress]
-        public string Email { get; set; } = string.Empty;
-
-        [Required]
-        [StringLength(100, ErrorMessage = "Пароль должен содержать не менее {2} символов", MinimumLength = 6)]
-        [DataType(DataType.Password)]
-        public string Password { get; set; } = string.Empty;
-
-        [DataType(DataType.Password)]
-        [Compare("Password", ErrorMessage = "Пароли не совпадают")]
-        public string ConfirmPassword { get; set; } = string.Empty;
-
-        [Required]
-        public string FullName { get; set; } = string.Empty;
-
-        public string? Address { get; set; }
-    }
-
-    public class LoginViewModel
-    {
-        [Required]
-        [EmailAddress]
-        public string Email { get; set; } = string.Empty;
-
-        [Required]
-        [DataType(DataType.Password)]
-        public string Password { get; set; } = string.Empty;
-
-        [Display(Name = "Запомнить меня")]
-        public bool RememberMe { get; set; }
     }
 }

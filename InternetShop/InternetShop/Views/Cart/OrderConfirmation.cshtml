@@ -1,0 +1,15 @@
+﻿@model Order
+
+@{
+    ViewData["Title"] = "Заказ оформлен";
+}
+
+<div class="alert alert-success">
+    <h2>Спасибо за заказ! 🎉</h2>
+    <p>Номер вашего заказа: <strong>#@Model.Id</strong></p>
+    <p>Сумма заказа: <strong>@Model.TotalAmount.ToString("C")</strong></p>
+    <p>Статус: <span class="badge bg-warning">@Model.Status</span></p>
+    <p>Мы свяжемся с вами для подтверждения заказа.</p>
+    <a asp-controller="Orders" asp-action="Index" class="btn btn-primary">Мои заказы</a>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">На главную</a>
+</div>

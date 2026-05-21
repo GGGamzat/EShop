@@ -122,7 +122,11 @@ namespace InternetShop.Controllers
             if (!ModelState.IsValid)
                 return View(order);
 
-            order.UserId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(userId))
+                return RedirectToAction("Login", "Account");
+
+            order.UserId = userId;
             order.OrderDate = DateTime.Now;
             order.TotalAmount = cart.Sum(c => c.Total);
             order.Status = "Pending";
@@ -142,7 +146,6 @@ namespace InternetShop.Controllers
                 };
                 _context.OrderItems.Add(orderItem);
 
-                // Обновление остатков
                 var product = await _context.Products.FindAsync(cartItem.ProductId);
                 if (product != null)
                 {
@@ -152,7 +155,6 @@ namespace InternetShop.Controllers
 
             await _context.SaveChangesAsync();
 
-            // Очистка корзины
             HttpContext.Session.Remove(CartSessionKey);
 
             return RedirectToAction("OrderConfirmation", new { id = order.Id });

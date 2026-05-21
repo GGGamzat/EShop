@@ -18,22 +18,20 @@ namespace InternetShop.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var stats = new AdminStats
-            {
-                TotalProducts = await _context.Products.CountAsync(),
-                TotalOrders = await _context.Orders.CountAsync(),
-                TotalUsers = await _context.Users.CountAsync(),
-                RecentOrders = await _context.Orders
-                    .Include(o => o.User)
-                    .OrderByDescending(o => o.OrderDate)
-                    .Take(10)
-                    .ToListAsync()
-            };
+            ViewBag.TotalProducts = await _context.Products.CountAsync();
+            ViewBag.TotalOrders = await _context.Orders.CountAsync();
+            ViewBag.TotalUsers = await _context.Users.CountAsync();
+            ViewBag.PendingOrders = await _context.Orders.CountAsync(o => o.Status == "Pending");
 
-            return View(stats);
+            var recentOrders = await _context.Orders
+                .Include(o => o.User)
+                .OrderByDescending(o => o.OrderDate)
+                .Take(5)
+                .ToListAsync();
+
+            return View(recentOrders);
         }
 
-        // Products CRUD
         public async Task<IActionResult> Products()
         {
             var products = await _context.Products.ToListAsync();
@@ -132,13 +130,5 @@ namespace InternetShop.Controllers
         {
             return _context.Products.Any(e => e.Id == id);
         }
-    }
-
-    public class AdminStats
-    {
-        public int TotalProducts { get; set; }
-        public int TotalOrders { get; set; }
-        public int TotalUsers { get; set; }
-        public List<Order> RecentOrders { get; set; } = new List<Order>();
     }
 }

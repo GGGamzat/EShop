@@ -1,4 +1,4 @@
-﻿@model List<InternetShop.Models.CartItem>
+﻿@model List<CartItem>
 
 @{
     ViewData["Title"] = "Корзина";
@@ -22,16 +22,7 @@ else
                     {
                         <div class="row mb-3 pb-3 border-bottom">
                             <div class="col-md-2">
-                                @if (!string.IsNullOrEmpty(item.ImageUrl))
-                                {
-                                    <img src="@item.ImageUrl" class="img-fluid" alt="@item.ProductName">
-                                }
-                                else
-                                {
-                                    <div class="bg-light text-center p-3">
-                                        <i class="fas fa-image fa-2x"></i>
-                                    </div>
-                                }
+                                <div class="bg-light text-center p-3"><i class="fas fa-box fa-2x"></i></div>
                             </div>
                             <div class="col-md-4">
                                 <h5>@item.ProductName</h5>
@@ -45,14 +36,12 @@ else
                                 </form>
                             </div>
                             <div class="col-md-2">
-                                <span class="h5">@item.Total.ToString("C")</span>
+                                <span class="h5 text-primary">@item.Total.ToString("C")</span>
                             </div>
                             <div class="col-md-1">
                                 <form asp-action="RemoveFromCart" method="post">
                                     <input type="hidden" name="productId" value="@item.ProductId" />
-                                    <button type="submit" class="btn btn-danger btn-sm">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
+                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
                                 </form>
                             </div>
                         </div>
@@ -62,24 +51,12 @@ else
         </div>
         <div class="col-md-4">
             <div class="card">
-                <div class="card-header">
-                    <h5>Итого</h5>
-                </div>
+                <div class="card-header bg-primary text-white"><h5 class="mb-0">Итого</h5></div>
                 <div class="card-body">
-                    <div class="d-flex justify-content-between mb-2">
-                        <span>Количество товаров:</span>
-                        <strong>@Model.Sum(i => i.Quantity)</strong>
-                    </div>
-                    <div class="d-flex justify-content-between mb-3">
-                        <span>Общая сумма:</span>
-                        <strong class="h5 text-primary">@Model.Sum(i => i.Total).ToString("C")</strong>
-                    </div>
-                    <a asp-controller="Cart" asp-action="Checkout" class="btn btn-success w-100">
-                        <i class="fas fa-credit-card"></i> Оформить заказ
-                    </a>
-                    <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary w-100 mt-2">
-                        Продолжить покупки
-                    </a>
+                    <div class="d-flex justify-content-between mb-2"><span>Товаров:</span><strong>@Model.Sum(i => i.Quantity) шт.</strong></div>
+                    <div class="d-flex justify-content-between mb-3"><span>Сумма:</span><strong class="h4 text-primary">@Model.Sum(i => i.Total).ToString("C")</strong></div>
+                    <a asp-controller="Cart" asp-action="Checkout" class="btn btn-success w-100"><i class="fas fa-credit-card"></i> Оформить заказ</a>
+                    <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary w-100 mt-2">Продолжить покупки</a>
                 </div>
             </div>
         </div>

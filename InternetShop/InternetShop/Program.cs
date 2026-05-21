@@ -33,7 +33,7 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
-// Настройка ролей (для админа)
+// Настройка cookies
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/Account/Login";
@@ -54,9 +54,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
-app.UseAuthentication(); // ВАЖНО: должна быть перед UseAuthorization
+app.UseAuthentication();
 app.UseAuthorization();
-app.UseSession(); // Добавьте эту строку для работы корзины
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",

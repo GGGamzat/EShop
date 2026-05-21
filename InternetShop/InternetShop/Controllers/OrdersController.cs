@@ -19,6 +19,9 @@ namespace InternetShop.Controllers
         public async Task<IActionResult> Index()
         {
             var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(userId))
+                return RedirectToAction("Login", "Account");
+
             var orders = await _context.Orders
                 .Include(o => o.OrderItems)
                 .Where(o => o.UserId == userId)
@@ -31,6 +34,9 @@ namespace InternetShop.Controllers
         public async Task<IActionResult> Details(int id)
         {
             var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(userId))
+                return RedirectToAction("Login", "Account");
+
             var order = await _context.Orders
                 .Include(o => o.OrderItems)
                 .FirstOrDefaultAsync(o => o.Id == id && o.UserId == userId);
@@ -45,16 +51,18 @@ namespace InternetShop.Controllers
         public async Task<IActionResult> CancelOrder(int id)
         {
             var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(userId))
+                return RedirectToAction("Login", "Account");
+
             var order = await _context.Orders
+                .Include(o => o.OrderItems)
                 .FirstOrDefaultAsync(o => o.Id == id && o.UserId == userId);
 
             if (order != null && order.Status == "Pending")
             {
                 order.Status = "Cancelled";
 
-                // Возврат товаров на склад
-                var orderItems = _context.OrderItems.Where(oi => oi.OrderId == order.Id);
-                foreach (var item in orderItems)
+                foreach (var item in order.OrderItems!)
                 {
                     var product = await _context.Products.FindAsync(item.ProductId);
                     if (product != null)

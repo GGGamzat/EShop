@@ -43,9 +43,9 @@ namespace InternetShop.Data
                 new Product
                 {
                     Id = 1,
-                    Name = "Ноутбук Lenovo",
-                    Description = "Мощный ноутбук для работы и игр",
-                    Price = 45000,
+                    Name = "Ноутбук Lenovo ThinkPad",
+                    Description = "Мощный ноутбук для работы и учебы. Процессор Intel Core i5, 16GB RAM, 512GB SSD",
+                    Price = 65000,
                     Stock = 10,
                     Category = "Электроника",
                     ImageUrl = "/images/laptop.jpg"
@@ -53,22 +53,42 @@ namespace InternetShop.Data
                 new Product
                 {
                     Id = 2,
-                    Name = "Смартфон Xiaomi",
-                    Description = "Современный смартфон с отличной камерой",
-                    Price = 25000,
-                    Stock = 20,
+                    Name = "Смартфон Xiaomi Mi 11",
+                    Description = "Современный смартфон с отличной камерой 108MP, AMOLED экран",
+                    Price = 35000,
+                    Stock = 15,
                     Category = "Электроника",
                     ImageUrl = "/images/phone.jpg"
                 },
                 new Product
                 {
                     Id = 3,
-                    Name = "Наушники Sony",
-                    Description = "Беспроводные наушники с шумоподавлением",
-                    Price = 8000,
-                    Stock = 30,
+                    Name = "Наушники Sony WH-1000XM4",
+                    Description = "Беспроводные наушники с шумоподавлением, время работы до 30 часов",
+                    Price = 25000,
+                    Stock = 8,
                     Category = "Аксессуары",
                     ImageUrl = "/images/headphones.jpg"
+                },
+                new Product
+                {
+                    Id = 4,
+                    Name = "Мышь Logitech MX Master 3",
+                    Description = "Беспроводная мышь для профессионалов, эргономичный дизайн",
+                    Price = 8000,
+                    Stock = 20,
+                    Category = "Аксессуары",
+                    ImageUrl = "/images/mouse.jpg"
+                },
+                new Product
+                {
+                    Id = 5,
+                    Name = "Клавиатура Mechanical",
+                    Description = "Механическая клавиатура с подсветкой RGB, красные свитчи",
+                    Price = 6500,
+                    Stock = 12,
+                    Category = "Аксессуары",
+                    ImageUrl = "/images/keyboard.jpg"
                 }
             );
         }

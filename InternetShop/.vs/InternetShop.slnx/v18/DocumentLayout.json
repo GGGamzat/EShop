@@ -3,8 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\Gamzat\\source\\repos\\InternetShop\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Gamzat\\source\\repos\\InternetShop\\InternetShop\\Migrations\\20260521192540_InitialCreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:InternetShop\\Migrations\\20260521192540_InitialCreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{10D6A496-FFC6-EE5F-06A5-778E0BD74D59}|InternetShop\\InternetShop.csproj|c:\\users\\gamzat\\source\\repos\\internetshop\\internetshop\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{10D6A496-FFC6-EE5F-06A5-778E0BD74D59}|InternetShop\\InternetShop.csproj|solutionrelative:internetshop\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Gamzat\\source\\repos\\InternetShop\\InternetShop\\Migrations\\20260613202840_InitialCreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:InternetShop\\Migrations\\20260613202840_InitialCreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Gamzat\\source\\repos\\InternetShop\\InternetShop\\Migrations\\20260613202050_InitialCreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:InternetShop\\Migrations\\20260613202050_InitialCreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -19,14 +27,40 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "20260521192540_InitialCreate.cs",
-              "DocumentMoniker": "C:\\Users\\Gamzat\\source\\repos\\InternetShop\\InternetShop\\Migrations\\20260521192540_InitialCreate.cs",
-              "RelativeDocumentMoniker": "InternetShop\\Migrations\\20260521192540_InitialCreate.cs",
-              "ToolTip": "C:\\Users\\Gamzat\\source\\repos\\InternetShop\\InternetShop\\Migrations\\20260521192540_InitialCreate.cs",
-              "RelativeToolTip": "InternetShop\\Migrations\\20260521192540_InitialCreate.cs",
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Gamzat\\source\\repos\\InternetShop\\InternetShop\\appsettings.json",
+              "RelativeDocumentMoniker": "InternetShop\\appsettings.json",
+              "ToolTip": "C:\\Users\\Gamzat\\source\\repos\\InternetShop\\InternetShop\\appsettings.json",
+              "RelativeToolTip": "InternetShop\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-06-13T20:30:28.703Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "20260613202840_InitialCreate.cs",
+              "DocumentMoniker": "C:\\Users\\Gamzat\\source\\repos\\InternetShop\\InternetShop\\Migrations\\20260613202840_InitialCreate.cs",
+              "RelativeDocumentMoniker": "InternetShop\\Migrations\\20260613202840_InitialCreate.cs",
+              "ToolTip": "C:\\Users\\Gamzat\\source\\repos\\InternetShop\\InternetShop\\Migrations\\20260613202840_InitialCreate.cs",
+              "RelativeToolTip": "InternetShop\\Migrations\\20260613202840_InitialCreate.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-21T19:25:41.698Z",
+              "WhenOpened": "2026-06-13T20:28:41.038Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "20260613202050_InitialCreate.cs",
+              "DocumentMoniker": "C:\\Users\\Gamzat\\source\\repos\\InternetShop\\InternetShop\\Migrations\\20260613202050_InitialCreate.cs",
+              "RelativeDocumentMoniker": "InternetShop\\Migrations\\20260613202050_InitialCreate.cs",
+              "ToolTip": "C:\\Users\\Gamzat\\source\\repos\\InternetShop\\InternetShop\\Migrations\\20260613202050_InitialCreate.cs",
+              "RelativeToolTip": "InternetShop\\Migrations\\20260613202050_InitialCreate.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-13T20:20:51.129Z",
               "EditorCaption": ""
             }
           ]

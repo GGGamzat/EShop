@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InternetShop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260521192540_InitialCreate")]
+    [Migration("20260613202840_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -102,6 +102,9 @@ namespace InternetShop.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("Calories")
+                        .HasColumnType("int");
+
                     b.Property<string>("Category")
                         .HasColumnType("nvarchar(max)");
 
@@ -113,7 +116,16 @@ namespace InternetShop.Migrations
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
+                    b.Property<DateTime?>("ExpiryDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsOrganic")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Manufacturer")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -127,6 +139,12 @@ namespace InternetShop.Migrations
                     b.Property<int>("Stock")
                         .HasColumnType("int");
 
+                    b.Property<string>("StorageConditions")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Unit")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Products");
@@ -135,57 +153,172 @@ namespace InternetShop.Migrations
                         new
                         {
                             Id = 1,
-                            Category = "Электроника",
-                            CreatedAt = new DateTime(2026, 5, 21, 22, 25, 39, 587, DateTimeKind.Local).AddTicks(1011),
-                            Description = "Мощный ноутбук для работы и учебы. Процессор Intel Core i5, 16GB RAM, 512GB SSD",
-                            ImageUrl = "/images/laptop.jpg",
-                            Name = "Ноутбук Lenovo ThinkPad",
-                            Price = 65000m,
-                            Stock = 10
+                            Calories = 52,
+                            Category = "Фрукты",
+                            CreatedAt = new DateTime(2026, 6, 13, 23, 28, 40, 604, DateTimeKind.Local).AddTicks(1363),
+                            Description = "Свежие, сочные яблоки с кисло-сладким вкусом. Урожай 2024 года.",
+                            ExpiryDate = new DateTime(2026, 7, 13, 23, 28, 40, 604, DateTimeKind.Local).AddTicks(1383),
+                            ImageUrl = "/images/apples.jpg",
+                            IsOrganic = true,
+                            Manufacturer = "Local Farm",
+                            Name = "Яблоки Гренни Смит",
+                            Price = 150m,
+                            Stock = 100,
+                            StorageConditions = "Хранить в холодильнике при +2-4°C",
+                            Unit = "кг"
                         },
                         new
                         {
                             Id = 2,
-                            Category = "Электроника",
-                            CreatedAt = new DateTime(2026, 5, 21, 22, 25, 39, 587, DateTimeKind.Local).AddTicks(1034),
-                            Description = "Современный смартфон с отличной камерой 108MP, AMOLED экран",
-                            ImageUrl = "/images/phone.jpg",
-                            Name = "Смартфон Xiaomi Mi 11",
-                            Price = 35000m,
-                            Stock = 15
+                            Calories = 77,
+                            Category = "Овощи",
+                            CreatedAt = new DateTime(2026, 6, 13, 23, 28, 40, 604, DateTimeKind.Local).AddTicks(1396),
+                            Description = "Молодой картофель, выращенный в экологически чистых условиях",
+                            ExpiryDate = new DateTime(2026, 6, 27, 23, 28, 40, 604, DateTimeKind.Local).AddTicks(1397),
+                            ImageUrl = "/images/potato.jpg",
+                            IsOrganic = true,
+                            Manufacturer = "Фермерское хозяйство",
+                            Name = "Картофель молодой",
+                            Price = 80m,
+                            Stock = 200,
+                            StorageConditions = "Темное сухое место при +5-10°C",
+                            Unit = "кг"
                         },
                         new
                         {
                             Id = 3,
-                            Category = "Аксессуары",
-                            CreatedAt = new DateTime(2026, 5, 21, 22, 25, 39, 587, DateTimeKind.Local).AddTicks(1036),
-                            Description = "Беспроводные наушники с шумоподавлением, время работы до 30 часов",
-                            ImageUrl = "/images/headphones.jpg",
-                            Name = "Наушники Sony WH-1000XM4",
-                            Price = 25000m,
-                            Stock = 8
+                            Calories = 165,
+                            Category = "Мясо",
+                            CreatedAt = new DateTime(2026, 6, 13, 23, 28, 40, 604, DateTimeKind.Local).AddTicks(1399),
+                            Description = "Свежее куриное филе без кости и кожи. Охлажденное.",
+                            ExpiryDate = new DateTime(2026, 6, 18, 23, 28, 40, 604, DateTimeKind.Local).AddTicks(1400),
+                            ImageUrl = "/images/chicken.jpg",
+                            IsOrganic = false,
+                            Manufacturer = "Птицефабрика №1",
+                            Name = "Куриное филе",
+                            Price = 350m,
+                            Stock = 50,
+                            StorageConditions = "Хранить при температуре от 0 до +4°C",
+                            Unit = "кг"
                         },
                         new
                         {
                             Id = 4,
-                            Category = "Аксессуары",
-                            CreatedAt = new DateTime(2026, 5, 21, 22, 25, 39, 587, DateTimeKind.Local).AddTicks(1037),
-                            Description = "Беспроводная мышь для профессионалов, эргономичный дизайн",
-                            ImageUrl = "/images/mouse.jpg",
-                            Name = "Мышь Logitech MX Master 3",
-                            Price = 8000m,
-                            Stock = 20
+                            Calories = 60,
+                            Category = "Молочные продукты",
+                            CreatedAt = new DateTime(2026, 6, 13, 23, 28, 40, 604, DateTimeKind.Local).AddTicks(1402),
+                            Description = "Пастеризованное молоко высшего качества",
+                            ExpiryDate = new DateTime(2026, 6, 20, 23, 28, 40, 604, DateTimeKind.Local).AddTicks(1403),
+                            ImageUrl = "/images/milk.jpg",
+                            IsOrganic = false,
+                            Manufacturer = "Молочная ферма",
+                            Name = "Молоко 3.2%",
+                            Price = 89m,
+                            Stock = 150,
+                            StorageConditions = "Хранить при температуре от +2 до +6°C",
+                            Unit = "л"
                         },
                         new
                         {
                             Id = 5,
-                            Category = "Аксессуары",
-                            CreatedAt = new DateTime(2026, 5, 21, 22, 25, 39, 587, DateTimeKind.Local).AddTicks(1039),
-                            Description = "Механическая клавиатура с подсветкой RGB, красные свитчи",
-                            ImageUrl = "/images/keyboard.jpg",
-                            Name = "Клавиатура Mechanical",
-                            Price = 6500m,
-                            Stock = 12
+                            Calories = 210,
+                            Category = "Хлебобулочные",
+                            CreatedAt = new DateTime(2026, 6, 13, 23, 28, 40, 604, DateTimeKind.Local).AddTicks(1405),
+                            Description = "Свежевыпеченный ржаной хлеб на закваске",
+                            ExpiryDate = new DateTime(2026, 6, 16, 23, 28, 40, 604, DateTimeKind.Local).AddTicks(1406),
+                            ImageUrl = "/images/bread.jpg",
+                            IsOrganic = false,
+                            Manufacturer = "Хлебозавод",
+                            Name = "Хлеб ржаной",
+                            Price = 55m,
+                            Stock = 30,
+                            StorageConditions = "Хранить при комнатной температуре",
+                            Unit = "шт"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Calories = 208,
+                            Category = "Рыба",
+                            CreatedAt = new DateTime(2026, 6, 13, 23, 28, 40, 604, DateTimeKind.Local).AddTicks(1407),
+                            Description = "Филе лосося слабой соли, вакуумная упаковка",
+                            ExpiryDate = new DateTime(2026, 6, 27, 23, 28, 40, 604, DateTimeKind.Local).AddTicks(1408),
+                            ImageUrl = "/images/salmon.jpg",
+                            IsOrganic = true,
+                            Manufacturer = "Рыбный промысел",
+                            Name = "Лосось слабосоленый",
+                            Price = 850m,
+                            Stock = 25,
+                            StorageConditions = "Хранить при температуре от -2 до +2°C",
+                            Unit = "кг"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Calories = 18,
+                            Category = "Овощи",
+                            CreatedAt = new DateTime(2026, 6, 13, 23, 28, 40, 604, DateTimeKind.Local).AddTicks(1410),
+                            Description = "Сладкие помидоры черри на ветке",
+                            ExpiryDate = new DateTime(2026, 6, 23, 23, 28, 40, 604, DateTimeKind.Local).AddTicks(1411),
+                            ImageUrl = "/images/tomatoes.jpg",
+                            IsOrganic = true,
+                            Manufacturer = "Тепличный комплекс",
+                            Name = "Помидоры черри",
+                            Price = 220m,
+                            Stock = 80,
+                            StorageConditions = "Хранить в холодильнике",
+                            Unit = "кг"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Calories = 431,
+                            Category = "Молочные продукты",
+                            CreatedAt = new DateTime(2026, 6, 13, 23, 28, 40, 604, DateTimeKind.Local).AddTicks(1412),
+                            Description = "Твердый итальянский сыр 24 месяца выдержки",
+                            ExpiryDate = new DateTime(2026, 12, 13, 23, 28, 40, 604, DateTimeKind.Local).AddTicks(1413),
+                            ImageUrl = "/images/cheese.jpg",
+                            IsOrganic = false,
+                            Manufacturer = "Italy Cheese",
+                            Name = "Сыр Пармезан",
+                            Price = 1200m,
+                            Stock = 40,
+                            StorageConditions = "Хранить в холодильнике при +4-8°C",
+                            Unit = "кг"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Calories = 304,
+                            Category = "Бакалея",
+                            CreatedAt = new DateTime(2026, 6, 13, 23, 28, 40, 604, DateTimeKind.Local).AddTicks(1419),
+                            Description = "Натуральный цветочный мед без добавок",
+                            ExpiryDate = new DateTime(2028, 6, 13, 23, 28, 40, 604, DateTimeKind.Local).AddTicks(1420),
+                            ImageUrl = "/images/honey.jpg",
+                            IsOrganic = true,
+                            Manufacturer = "Пасека",
+                            Name = "Мед цветочный",
+                            Price = 450m,
+                            Stock = 60,
+                            StorageConditions = "Хранить при комнатной температуре",
+                            Unit = "кг"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Calories = 23,
+                            Category = "Зелень",
+                            CreatedAt = new DateTime(2026, 6, 13, 23, 28, 40, 604, DateTimeKind.Local).AddTicks(1423),
+                            Description = "Молодой свежий шпинат в упаковке",
+                            ExpiryDate = new DateTime(2026, 6, 18, 23, 28, 40, 604, DateTimeKind.Local).AddTicks(1424),
+                            ImageUrl = "/images/spinach.jpg",
+                            IsOrganic = true,
+                            Manufacturer = "Green Farm",
+                            Name = "Шпинат свежий",
+                            Price = 120m,
+                            Stock = 45,
+                            StorageConditions = "Хранить в холодильнике при +2-4°C",
+                            Unit = "100г"
                         });
                 });
 

@@ -4,7 +4,7 @@
     ViewData["Title"] = "Корзина";
 }
 
-<h1>Корзина</h1>
+<h1>Корзина 🛒</h1>
 
 @if (!Model.Any())
 {
@@ -22,11 +22,13 @@ else
                     {
                         <div class="row mb-3 pb-3 border-bottom">
                             <div class="col-md-2">
-                                <div class="bg-light text-center p-3"><i class="fas fa-box fa-2x"></i></div>
+                                <div class="bg-light text-center p-3">
+                                    <i class="fas fa-apple-alt fa-2x text-success"></i>
+                                </div>
                             </div>
                             <div class="col-md-4">
                                 <h5>@item.ProductName</h5>
-                                <p class="text-muted">@item.Price.ToString("C")</p>
+                                <p class="text-muted mb-0">@item.Price.ToString("C") / шт</p>
                             </div>
                             <div class="col-md-3">
                                 <form asp-action="UpdateQuantity" method="post" class="d-flex">
@@ -41,7 +43,9 @@ else
                             <div class="col-md-1">
                                 <form asp-action="RemoveFromCart" method="post">
                                     <input type="hidden" name="productId" value="@item.ProductId" />
-                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                                    <button type="submit" class="btn btn-danger btn-sm">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
                                 </form>
                             </div>
                         </div>
@@ -51,12 +55,31 @@ else
         </div>
         <div class="col-md-4">
             <div class="card">
-                <div class="card-header bg-primary text-white"><h5 class="mb-0">Итого</h5></div>
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">Детали заказа</h5>
+                </div>
                 <div class="card-body">
-                    <div class="d-flex justify-content-between mb-2"><span>Товаров:</span><strong>@Model.Sum(i => i.Quantity) шт.</strong></div>
-                    <div class="d-flex justify-content-between mb-3"><span>Сумма:</span><strong class="h4 text-primary">@Model.Sum(i => i.Total).ToString("C")</strong></div>
-                    <a asp-controller="Cart" asp-action="Checkout" class="btn btn-success w-100"><i class="fas fa-credit-card"></i> Оформить заказ</a>
-                    <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary w-100 mt-2">Продолжить покупки</a>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Товаров:</span>
+                        <strong>@Model.Sum(i => i.Quantity) шт.</strong>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Сумма:</span>
+                        <strong class="h5 text-primary">@Model.Sum(i => i.Total).ToString("C")</strong>
+                    </div>
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>Доставка:</span>
+                        <strong>@(Model.Sum(i => i.Total) >= 2000 ? "Бесплатно" : "200₽")</strong>
+                    </div>
+                    <div class="alert alert-info small">
+                        <i class="fas fa-info-circle"></i> Минимальная сумма заказа: 500₽
+                    </div>
+                    <a asp-controller="Cart" asp-action="Checkout" class="btn btn-success w-100">
+                        <i class="fas fa-credit-card"></i> Оформить заказ
+                    </a>
+                    <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary w-100 mt-2">
+                        Продолжить покупки
+                    </a>
                 </div>
             </div>
         </div>

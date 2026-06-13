@@ -4,13 +4,13 @@
     ViewData["Title"] = $"Заказ #{Model.Id}";
 }
 
-<h1>Детали заказа #@Model.Id</h1>
+<h1>Детали заказа #@Model.Id 🍽️</h1>
 
 <div class="row">
     <div class="col-md-6">
         <div class="card mb-3">
             <div class="card-header bg-info text-white">
-                <h5 class="mb-0">Информация о заказе</h5>
+                <h5 class="mb-0">Информация о доставке</h5>
             </div>
             <div class="card-body">
                 <p><strong>Дата заказа:</strong> @Model.OrderDate.ToString("dd.MM.yyyy HH:mm")</p>
@@ -18,26 +18,24 @@
                     <strong>Статус:</strong>
                     @if (Model.Status == "Pending")
                     {
-                        <span class="badge bg-warning">Ожидает</span>
+                        <span class="badge bg-warning">⏳ Ожидает подтверждения</span>
                     }
                     else if (Model.Status == "Shipped")
                     {
-
-                        <span class="badge bg-info">Отправлен</span>
+                        <span class="badge bg-info">🚚 В пути</span>
                     }
                     else if (Model.Status == "Delivered")
                     {
-
-                        <span class="badge bg-success">Доставлен</span>
+                        <span class="badge bg-success">✅ Доставлен</span>
                     }
-                    else
+                    else if (Model.Status == "Cancelled")
                     {
-
-                        <span class="badge bg-danger">Отменен</span>
+                        <span class="badge bg-danger">❌ Отменен</span>
                     }
                 </p>
                 <p><strong>Адрес доставки:</strong> @Model.ShippingAddress</p>
                 <p><strong>Телефон:</strong> @Model.PhoneNumber</p>
+                <p><strong>Примерное время доставки:</strong> 1-2 часа</p>
             </div>
         </div>
     </div>
@@ -49,14 +47,14 @@
             <div class="card-body">
                 <table class="table">
                     <thead>
-                        <tr><th>Товар</th><th>Кол-во</th><th>Цена</th><th>Сумма</th></tr>
+                        <tr><th>Продукт</th><th>Кол-во</th><th>Цена</th><th>Сумма</th></tr>
                     </thead>
                     <tbody>
                         @foreach (var item in Model.OrderItems!)
                         {
                             <tr>
                                 <td>@item.ProductName</td>
-                                <td>@item.Quantity</td>
+                                <td>@item.Quantity шт.</td>
                                 <td>@item.Price.ToString("C")</td>
                                 <td>@((item.Quantity * item.Price).ToString("C"))</td>
                             </tr>
@@ -66,6 +64,10 @@
                         <tr class="table-primary">
                             <td colspan="3" class="text-end"><strong>Итого:</strong></td>
                             <td><strong>@Model.TotalAmount.ToString("C")</strong></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-end">Доставка:</td>
+                            <td>@(Model.TotalAmount >= 2000 ? "Бесплатно" : "200₽")</td>
                         </tr>
                     </tfoot>
                 </table>

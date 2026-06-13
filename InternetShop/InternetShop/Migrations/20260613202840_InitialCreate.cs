@@ -67,6 +67,12 @@ namespace InternetShop.Migrations
                     Stock = table.Column<int>(type: "int", nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Category = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Unit = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ExpiryDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Manufacturer = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Calories = table.Column<int>(type: "int", nullable: true),
+                    IsOrganic = table.Column<bool>(type: "bit", nullable: false),
+                    StorageConditions = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -235,14 +241,19 @@ namespace InternetShop.Migrations
 
             migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] { "Id", "Category", "CreatedAt", "Description", "ImageUrl", "Name", "Price", "Stock" },
+                columns: new[] { "Id", "Calories", "Category", "CreatedAt", "Description", "ExpiryDate", "ImageUrl", "IsOrganic", "Manufacturer", "Name", "Price", "Stock", "StorageConditions", "Unit" },
                 values: new object[,]
                 {
-                    { 1, "Электроника", new DateTime(2026, 5, 21, 22, 25, 39, 587, DateTimeKind.Local).AddTicks(1011), "Мощный ноутбук для работы и учебы. Процессор Intel Core i5, 16GB RAM, 512GB SSD", "/images/laptop.jpg", "Ноутбук Lenovo ThinkPad", 65000m, 10 },
-                    { 2, "Электроника", new DateTime(2026, 5, 21, 22, 25, 39, 587, DateTimeKind.Local).AddTicks(1034), "Современный смартфон с отличной камерой 108MP, AMOLED экран", "/images/phone.jpg", "Смартфон Xiaomi Mi 11", 35000m, 15 },
-                    { 3, "Аксессуары", new DateTime(2026, 5, 21, 22, 25, 39, 587, DateTimeKind.Local).AddTicks(1036), "Беспроводные наушники с шумоподавлением, время работы до 30 часов", "/images/headphones.jpg", "Наушники Sony WH-1000XM4", 25000m, 8 },
-                    { 4, "Аксессуары", new DateTime(2026, 5, 21, 22, 25, 39, 587, DateTimeKind.Local).AddTicks(1037), "Беспроводная мышь для профессионалов, эргономичный дизайн", "/images/mouse.jpg", "Мышь Logitech MX Master 3", 8000m, 20 },
-                    { 5, "Аксессуары", new DateTime(2026, 5, 21, 22, 25, 39, 587, DateTimeKind.Local).AddTicks(1039), "Механическая клавиатура с подсветкой RGB, красные свитчи", "/images/keyboard.jpg", "Клавиатура Mechanical", 6500m, 12 }
+                    { 1, 52, "Фрукты", new DateTime(2026, 6, 13, 23, 28, 40, 604, DateTimeKind.Local).AddTicks(1363), "Свежие, сочные яблоки с кисло-сладким вкусом. Урожай 2024 года.", new DateTime(2026, 7, 13, 23, 28, 40, 604, DateTimeKind.Local).AddTicks(1383), "/images/apples.jpg", true, "Local Farm", "Яблоки Гренни Смит", 150m, 100, "Хранить в холодильнике при +2-4°C", "кг" },
+                    { 2, 77, "Овощи", new DateTime(2026, 6, 13, 23, 28, 40, 604, DateTimeKind.Local).AddTicks(1396), "Молодой картофель, выращенный в экологически чистых условиях", new DateTime(2026, 6, 27, 23, 28, 40, 604, DateTimeKind.Local).AddTicks(1397), "/images/potato.jpg", true, "Фермерское хозяйство", "Картофель молодой", 80m, 200, "Темное сухое место при +5-10°C", "кг" },
+                    { 3, 165, "Мясо", new DateTime(2026, 6, 13, 23, 28, 40, 604, DateTimeKind.Local).AddTicks(1399), "Свежее куриное филе без кости и кожи. Охлажденное.", new DateTime(2026, 6, 18, 23, 28, 40, 604, DateTimeKind.Local).AddTicks(1400), "/images/chicken.jpg", false, "Птицефабрика №1", "Куриное филе", 350m, 50, "Хранить при температуре от 0 до +4°C", "кг" },
+                    { 4, 60, "Молочные продукты", new DateTime(2026, 6, 13, 23, 28, 40, 604, DateTimeKind.Local).AddTicks(1402), "Пастеризованное молоко высшего качества", new DateTime(2026, 6, 20, 23, 28, 40, 604, DateTimeKind.Local).AddTicks(1403), "/images/milk.jpg", false, "Молочная ферма", "Молоко 3.2%", 89m, 150, "Хранить при температуре от +2 до +6°C", "л" },
+                    { 5, 210, "Хлебобулочные", new DateTime(2026, 6, 13, 23, 28, 40, 604, DateTimeKind.Local).AddTicks(1405), "Свежевыпеченный ржаной хлеб на закваске", new DateTime(2026, 6, 16, 23, 28, 40, 604, DateTimeKind.Local).AddTicks(1406), "/images/bread.jpg", false, "Хлебозавод", "Хлеб ржаной", 55m, 30, "Хранить при комнатной температуре", "шт" },
+                    { 6, 208, "Рыба", new DateTime(2026, 6, 13, 23, 28, 40, 604, DateTimeKind.Local).AddTicks(1407), "Филе лосося слабой соли, вакуумная упаковка", new DateTime(2026, 6, 27, 23, 28, 40, 604, DateTimeKind.Local).AddTicks(1408), "/images/salmon.jpg", true, "Рыбный промысел", "Лосось слабосоленый", 850m, 25, "Хранить при температуре от -2 до +2°C", "кг" },
+                    { 7, 18, "Овощи", new DateTime(2026, 6, 13, 23, 28, 40, 604, DateTimeKind.Local).AddTicks(1410), "Сладкие помидоры черри на ветке", new DateTime(2026, 6, 23, 23, 28, 40, 604, DateTimeKind.Local).AddTicks(1411), "/images/tomatoes.jpg", true, "Тепличный комплекс", "Помидоры черри", 220m, 80, "Хранить в холодильнике", "кг" },
+                    { 8, 431, "Молочные продукты", new DateTime(2026, 6, 13, 23, 28, 40, 604, DateTimeKind.Local).AddTicks(1412), "Твердый итальянский сыр 24 месяца выдержки", new DateTime(2026, 12, 13, 23, 28, 40, 604, DateTimeKind.Local).AddTicks(1413), "/images/cheese.jpg", false, "Italy Cheese", "Сыр Пармезан", 1200m, 40, "Хранить в холодильнике при +4-8°C", "кг" },
+                    { 9, 304, "Бакалея", new DateTime(2026, 6, 13, 23, 28, 40, 604, DateTimeKind.Local).AddTicks(1419), "Натуральный цветочный мед без добавок", new DateTime(2028, 6, 13, 23, 28, 40, 604, DateTimeKind.Local).AddTicks(1420), "/images/honey.jpg", true, "Пасека", "Мед цветочный", 450m, 60, "Хранить при комнатной температуре", "кг" },
+                    { 10, 23, "Зелень", new DateTime(2026, 6, 13, 23, 28, 40, 604, DateTimeKind.Local).AddTicks(1423), "Молодой свежий шпинат в упаковке", new DateTime(2026, 6, 18, 23, 28, 40, 604, DateTimeKind.Local).AddTicks(1424), "/images/spinach.jpg", true, "Green Farm", "Шпинат свежий", 120m, 45, "Хранить в холодильнике при +2-4°C", "100г" }
                 });
 
             migrationBuilder.CreateIndex(

@@ -1,47 +1,136 @@
 ﻿@model Product
 
 @{
-    ViewData["Title"] = "Добавление товара";
+    ViewData["Title"] = "Добавление продукта";
 }
 
-<h1>Добавление товара</h1>
+<h1>Добавление продукта питания 🍎</h1>
 
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-8">
         <form asp-action="CreateProduct" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="mb-3">
-                <label asp-for="Name" class="form-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="Name" class="form-label">Название продукта *</label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="Category" class="form-label">Категория *</label>
+                        <select asp-for="Category" class="form-select">
+                            <option value="">Выберите...</option>
+                            <option>Овощи</option>
+                            <option>Фрукты</option>
+                            <option>Мясо</option>
+                            <option>Рыба</option>
+                            <option>Молочные продукты</option>
+                            <option>Хлебобулочные</option>
+                            <option>Бакалея</option>
+                            <option>Зелень</option>
+                            <option>Напитки</option>
+                            <option>Сладости</option>
+                        </select>
+                        <span asp-validation-for="Category" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
+            
             <div class="mb-3">
-                <label asp-for="Description" class="form-label"></label>
-                <textarea asp-for="Description" class="form-control" rows="5"></textarea>
+                <label asp-for="Description" class="form-label">Описание *</label>
+                <textarea asp-for="Description" class="form-control" rows="3"></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-            <div class="mb-3">
-                <label asp-for="Price" class="form-label"></label>
-                <input asp-for="Price" class="form-control" />
-                <span asp-validation-for="Price" class="text-danger"></span>
+            
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="mb-3">
+                        <label asp-for="Price" class="form-label">Цена *</label>
+                        <input asp-for="Price" class="form-control" />
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="mb-3">
+                        <label asp-for="Unit" class="form-label">Единица</label>
+                        <select asp-for="Unit" class="form-select">
+                            <option value="кг">кг</option>
+                            <option value="г">г</option>
+                            <option value="л">л</option>
+                            <option value="шт">шт</option>
+                            <option value="100г">100г</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="mb-3">
+                        <label asp-for="Stock" class="form-label">Количество *</label>
+                        <input asp-for="Stock" class="form-control" />
+                        <span asp-validation-for="Stock" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="mb-3">
+                        <label asp-for="Calories" class="form-label">Калории (ккал/100г)</label>
+                        <input asp-for="Calories" class="form-control" placeholder="Например: 52" />
+                    </div>
+                </div>
             </div>
-            <div class="mb-3">
-                <label asp-for="Stock" class="form-label"></label>
-                <input asp-for="Stock" class="form-control" />
-                <span asp-validation-for="Stock" class="text-danger"></span>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="Manufacturer" class="form-label">Производитель</label>
+                        <input asp-for="Manufacturer" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="ExpiryDate" class="form-label">Срок годности</label>
+                        <input asp-for="ExpiryDate" class="form-control" type="date" />
+                    </div>
+                </div>
             </div>
-            <div class="mb-3">
-                <label asp-for="Category" class="form-label"></label>
-                <input asp-for="Category" class="form-control" />
-                <span asp-validation-for="Category" class="text-danger"></span>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="StorageConditions" class="form-label">Условия хранения</label>
+                        <input asp-for="StorageConditions" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3 form-check mt-4">
+                        <input asp-for="IsOrganic" class="form-check-input" />
+                        <label asp-for="IsOrganic" class="form-check-label">Органический продукт (Organic)</label>
+                    </div>
+                </div>
             </div>
+            
             <div class="mb-3">
                 <label asp-for="ImageUrl" class="form-label">URL изображения</label>
                 <input asp-for="ImageUrl" class="form-control" placeholder="/images/product.jpg" />
-                <span asp-validation-for="ImageUrl" class="text-danger"></span>
             </div>
-            <button type="submit" class="btn btn-primary">Сохранить</button>
+            
+            <button type="submit" class="btn btn-primary">Сохранить продукт</button>
             <a asp-action="Products" class="btn btn-secondary">Отмена</a>
         </form>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card bg-light">
+            <div class="card-body">
+                <h6>Подсказка:</h6>
+                <small class="text-muted">
+                    - Для свежих продуктов указывайте срок годности<br />
+                    - Категория помогает сортировать товары<br />
+                    - Органические продукты отмечаются специальным значком
+                </small>
+            </div>
+        </div>
     </div>
 </div>
